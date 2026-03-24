@@ -41,23 +41,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______,  _______,  _______,                                _______,                                _______,  _______,  _______,  _______,  _______,  _______,  _______),
 
 };
-
-#ifdef RGB_MATRIX_ENABLE
-
-void keyboard_post_init_user(void) {
-    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-    rgb_matrix_sethsv_noeeprom(HSV_OFF);
-}
-
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    for (uint8_t i = led_min; i < led_max; i++) {
-        if (host_keyboard_led_state().caps_lock) {
-            rgb_matrix_set_color(i, RGB_RED);
-        } else if (is_caps_word_on()) {
-            rgb_matrix_set_color(i, RGB_ORANGE);
-        }
-    }
-    return false;
-}
-
-#endif // RGB_MATRIX_ENABLE
